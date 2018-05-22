@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+  <div class="panel-heading" (click)="onActivation()">
+     {{ title }}
+     <span class="glyphicon" 
+      [ngClass]="{
+        'glyphicon-chevron-up' : isActive,
+        'glyphicon-chevron-down' : !isActive
+      }">
+    </span>
+  </div>
+  <div class="panel-body" *ngIf="isActive">
+     <ng-content></ng-content>
+  </div>
+</div>
