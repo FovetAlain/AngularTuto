@@ -1,14 +1,19 @@
-<div class="panel panel-default">
-  <div class="panel-heading" (click)="onActivation()">
-     {{ title }}
-     <span class="glyphicon" 
+
+<div class="zippy">
+  <div 
+    class="zippy-heading"
+    [class.expanded]="isExpanded"
+    (click)="toggle()"
+    >
+    {{ title }}
+    <span class="glyphicon"
       [ngClass]="{
-        'glyphicon-chevron-up' : isActive,
-        'glyphicon-chevron-down' : !isActive
-      }">
-    </span>
+        'glyphicon-chevron-up': isExpanded,
+        'glyphicon-chevron-down': !isExpanded
+      }"
+    ></span>
   </div>
-  <div class="panel-body" *ngIf="isActive">
-     <ng-content></ng-content>
+  <div *ngIf="isExpanded" class="zippy-body">
+    <ng-content></ng-content>
   </div>
 </div>

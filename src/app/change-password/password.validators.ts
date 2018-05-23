@@ -1,23 +1,22 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 export class PasswordValidators {
-
-    static wrongPassword(control: AbstractControl): Promise<ValidationErrors | null> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (control.value !== '123456') {
-                    resolve( { wrongPassword: true } );
-                } else {
-                    resolve(null);
-                }
-            }, 2000);
+    static validOldPassword(control: AbstractControl) {
+        return new Promise((resolve) => {
+            if (control.value !== '1234')
+                resolve({ invalidOldPassword: true });
+            else
+                resolve(null);
         });
     }
 
-    static comparePassword(control: AbstractControl) {
-        if (control.get('confirmPassword').value !== control.get('newPassword').value) {
-            return { passwordNotMatch: true };
-        }
+    static passwordsShouldMatch(control: AbstractControl) {
+        let newPassword = control.get('newPassword');
+        let confirmPassword = control.get('confirmPassword');
+
+        if (newPassword.value !== confirmPassword.value)
+            return { passwordsShouldMatch: true };
+        
         return null;
     }
 }

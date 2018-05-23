@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-zippy',
+  selector: 'zippy',
   templateUrl: './zippy.component.html',
   styleUrls: ['./zippy.component.css']
 })
-export class ZippyComponent {
-  @Input() title: string;
-  isActive: boolean;
+export class ZippyComponent  {
+  @Input('title') title: string;
+  isExpanded: boolean;
 
-  onActivation() {
-    this.isActive = !this.isActive;
+  toggle() { 
+    this.isExpanded = !this.isExpanded;
   }
+
 }
