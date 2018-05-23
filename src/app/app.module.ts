@@ -1,3 +1,4 @@
+import { GithubFollowerService } from './services/github-follower.service';
 import { PostService } from './services/post.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -19,6 +20,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { HttpTestComponent } from './http-test/http-test.component';
 import { AppErrorHandler } from './common/app-error-handler';
+import { GithubFollowerComponent } from './github-follower/github-follower.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { AppErrorHandler } from './common/app-error-handler';
     SignupFormComponent,
     NewCourseFormComponent,
     ChangePasswordComponent,
-    HttpTestComponent
+    HttpTestComponent,
+    GithubFollowerComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { AppErrorHandler } from './common/app-error-handler';
   providers: [
     AuthorService,
     PostService,
+    GithubFollowerService,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
