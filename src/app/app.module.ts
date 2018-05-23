@@ -1,8 +1,12 @@
+import { MockBackend } from '@angular/http/testing';
+import { fakeBackendProvider } from './helpers/fake-backend';
+import { OrderService } from './services/order.service';
+import { AuthService } from './services/auth.service';
 import { ArchiveService } from './services/archive.service';
 import { GithubFollowersService } from './services/github-followers.service';
 import { AppErrorHandler } from './common/app-error-handler';
 import { PostService } from './services/post.service';
-import { HttpModule } from '@angular/http';
+import { HttpModule, BaseRequestOptions } from '@angular/http';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { SummaryPipe } from './summary.pipe';
 import { AuthorsService } from './authors.service';
@@ -33,6 +37,10 @@ import { GithubProfileComponent } from './github-profile/github-profile.componen
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { ArchiveDetailComponent } from './archive-detail/archive-detail.component';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +67,10 @@ import { ArchiveDetailComponent } from './archive-detail/archive-detail.componen
     NotFoundComponent,
     ArchiveComponent,
     ArchiveDetailComponent,
+    AdminComponent,
+    LoginComponent,
+    NoAccessComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,12 +78,10 @@ import { ArchiveDetailComponent } from './archive-detail/archive-detail.componen
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: '', component: ArchiveComponent},
-      {path: 'followers/:id/:username', component: GithubProfileComponent },
-      {path: 'followers', component: GithubFollowersComponent},
-      {path: 'posts', component: PostsComponent},
-      {path: 'archive/:year/:month', component: ArchiveDetailComponent},
-      {path: '**', component: NotFoundComponent}
+      {path: '', component: HomeComponent},
+      {path: 'admin', component: AdminComponent},
+      {path: 'login', component: LoginComponent},
+      {path: 'no-access', component: NoAccessComponent}
     ])
   ],
   providers: [
@@ -80,6 +90,11 @@ import { ArchiveDetailComponent } from './archive-detail/archive-detail.componen
     AuthorsService,
     GithubFollowersService,
     ArchiveService,
+    AuthService,
+    OrderService,
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
