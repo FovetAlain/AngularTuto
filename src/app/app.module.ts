@@ -1,3 +1,4 @@
+import { ArchiveService } from './services/archive.service';
 import { GithubFollowersService } from './services/github-followers.service';
 import { AppErrorHandler } from './common/app-error-handler';
 import { PostService } from './services/post.service';
@@ -8,7 +9,7 @@ import { AuthorsService } from './authors.service';
 import { CoursesService } from './courses.service';
 import { CoursesComponent } from './courses.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -29,7 +30,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
-import { NotFoundComponent } from './not-found/not-found.component'; 
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ArchiveComponent } from './archive/archive.component';
+import { ArchiveDetailComponent } from './archive-detail/archive-detail.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HomeComponent,
     GithubProfileComponent,
     NotFoundComponent,
+    ArchiveComponent,
+    ArchiveDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,10 +66,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: '', component: HomeComponent},
+      {path: '', component: ArchiveComponent},
       {path: 'followers/:id/:username', component: GithubProfileComponent },
       {path: 'followers', component: GithubFollowersComponent},
       {path: 'posts', component: PostsComponent},
+      {path: 'archive/:year/:month', component: ArchiveDetailComponent},
       {path: '**', component: NotFoundComponent}
     ])
   ],
@@ -73,6 +79,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CoursesService,
     AuthorsService,
     GithubFollowersService,
+    ArchiveService,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
